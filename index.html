@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Your First Little 6K</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#fbf6e4;--ink:#1f3b52;--ink2:rgba(31,59,82,.84);--leaf:#2f7752;--leaf2:#4f9a6b;--sky:#cfe7f3;--sky2:#8fc3e4;--sun:#f2c85b;--line:rgba(47,119,82,.35);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:linear-gradient(#cfe7f3,#e6f1e2 380px,#fbf6e4 760px) #fbf6e4;color:var(--ink);font:18px/1.7 "Source Sans 3",system-ui,sans-serif;padding-bottom:96px}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9;opacity:.06;mix-blend-mode:multiply;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:600;line-height:1.12;margin:.6em 0 .3em;color:var(--ink)}
+h1{font-size:clamp(2.4rem,10vw,3.6rem)}h2{font-size:2.05rem}h3{font-size:1.3rem;margin:.2em 0}
+.sky{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}.sky i{position:absolute;border-radius:50% 50% 50% 0;opacity:.6;animation:pf 12s ease-in-out infinite alternate}
+@keyframes pf{to{transform:translate(26px,-34px) rotate(70deg)}}.tw{animation:tw 4s infinite alternate}@keyframes tw{to{opacity:.2}}
+.pg{display:none;max-width:640px;margin:0 auto;padding:0 20px 56px;position:relative;z-index:1}
+.pg.on{display:block;animation:in .8s}@keyframes in{from{opacity:0}}
+.art{margin:0 -20px 8px;border-bottom:3px solid var(--leaf2)}.art svg{display:block;width:100%;height:auto}
+.lead{font-size:1.2rem;color:var(--ink2);margin:0 0 1.4em}p{margin:0 0 1em}.pre{white-space:pre-line}
+.b{font:inherit;font-weight:600;min-height:48px;padding:.55em 1.5em;border-radius:10px;border:2px solid var(--leaf);background:var(--leaf);color:#fff;cursor:pointer;margin:.3em .5em .3em 0}
+.b2{background:transparent;color:var(--ink);border-color:var(--leaf2)}.b2.sel{background:var(--sky2)}
+:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+label{display:block;color:var(--ink2)}
+#code,#rd{font:inherit;font-size:1.25rem;min-height:48px;padding:.4em .8em;border-radius:10px;border:2px solid var(--leaf2);background:#fff;color:var(--ink);width:9em}
+#rd{width:13em;font-size:1.05rem}.dt{margin:12px 0 20px}#code{letter-spacing:.2em;text-align:center}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:8px}#err{min-height:1.7em;color:#a8412c;font-weight:600}
+.fade{opacity:0;transform:translateY(10px);transition:opacity 1s,transform 1s}.fade.in{opacity:1;transform:none}
+.letter p{margin:0 0 1.5em;font-size:1.12rem;line-height:1.85}
+.letter .q{font-family:Fraunces,Georgia,serif;font-style:italic;font-size:1.35rem;line-height:1.5;border-left:3px solid var(--sun);padding-left:16px}
+.sig{font-family:Fraunces,Georgia,serif;font-size:1.4rem}
+.pn,.sv{border-left:3px solid var(--sun);padding:2px 0 2px 16px;margin:20px 0}.sv p{margin:.2em 0 0;color:var(--ink2)}
+#km{width:100%;height:44px;accent-color:var(--leaf)}#kz{transition:transform .9s ease}
+.it{display:flex;gap:14px;align-items:flex-start;min-height:52px;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer;color:var(--ink)}
+.it input{appearance:none;flex:none;width:28px;height:28px;margin:0;border:2px solid var(--leaf2);border-radius:8px;background:#fff;display:grid;place-items:center;cursor:pointer}
+.it input:checked{background:var(--leaf);border-color:var(--leaf)}.it input:checked::after{content:"";width:7px;height:13px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.bar{height:10px;background:var(--sky);border-radius:5px;overflow:hidden}.bar b{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--leaf2),var(--sun));transition:width .5s}
+#done{font-family:Fraunces,Georgia,serif;font-size:1.35rem;color:var(--leaf);margin:16px 0}
+.note{font-size:1rem;color:var(--ink2)}.nv{display:flex;justify-content:space-between;margin-top:36px}
+.rv{animation:rv 1s var(--d,0s) backwards}@keyframes rv{from{opacity:0;transform:translateY(10px)}}
+#kr{transform:translateX(175px)}.go #kr{animation:run 3s cubic-bezier(.4,0,.3,1) backwards}@keyframes run{from{transform:translateX(0)}}
+.t1,.t2{transform-box:fill-box}.t1{transform:translate(-26px,40px) rotate(-18deg);opacity:0}.t2{transform:translate(26px,40px) rotate(18deg);opacity:0}
+.go .t1,.go .t2{animation:tp .9s 1.7s backwards ease-in}@keyframes tp{from{transform:none;opacity:1}}
+#ob{animation:bo 1.1s ease-in-out 3s infinite alternate}@keyframes bo{to{transform:translateY(-7px)}}
+.flap{transform-box:fill-box;transform-origin:50% 0;transition:transform .9s}.paper{transition:transform .9s .4s}
+.open .flap{transform:scaleY(-1)}.open .paper{transform:translateY(-20px)}.open #env{filter:drop-shadow(0 0 9px #f2c85b)}
+.cld{animation:dr linear infinite alternate}@keyframes dr{to{transform:translateX(26px)}}
+.lp{animation:lb 4s ease-in-out infinite alternate}@keyframes lb{to{transform:translateY(2px)}}
+.wg{transform-box:fill-box;transform-origin:100% 50%;animation:wf .22s linear infinite alternate}.wg.r{transform-origin:0 50%}@keyframes wf{to{transform:scaleX(.25)}}
+.tap{cursor:pointer}.hop{animation:hop .6s}@keyframes hop{35%{transform:translateY(-16px)}70%{transform:translateY(0)}85%{transform:translateY(-4px)}}
+#sp{position:fixed;transform:translate(-50%,-100%);background:#fffdf4;color:var(--ink);border:2px solid var(--leaf2);border-radius:14px;padding:6px 12px;font-weight:600;max-width:230px;text-align:center;line-height:1.35;opacity:0;pointer-events:none;transition:opacity .25s;z-index:12}#sp.on{opacity:1}
+#bs i{position:fixed;width:8px;height:8px;border-radius:50%;pointer-events:none;z-index:12;animation:bst .9s ease-out forwards}@keyframes bst{to{transform:translate(var(--dx),var(--dy));opacity:0}}
+#cf{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:8}#cf i{position:absolute;top:-20px;animation:fall linear forwards}@keyframes fall{to{transform:translateY(112vh) rotate(540deg)}}
+#bibw{margin:28px 0}#bibw svg{display:block;width:100%;max-width:340px;margin:0 auto}.bib text{font-family:Fraunces,Georgia,serif;fill:#1f3b52}.bib .sn{font-family:"Source Sans 3",Arial,sans-serif;font-weight:600}
+#pl{position:fixed;left:0;right:0;bottom:0;z-index:10;display:flex;align-items:center;gap:14px;background:rgba(251,246,228,.96);border-top:2px solid var(--leaf2);padding:10px max(16px,calc((100vw - 640px)/2)) calc(10px + env(safe-area-inset-bottom,0px))}
+.pb{flex:none;width:52px;height:52px;border-radius:50%;border:0;background:var(--leaf);color:#fff;display:grid;place-items:center;cursor:pointer}
+.pi{flex:1;min-width:0;line-height:1.3}.pt{font-family:Fraunces,Georgia,serif;font-size:1.1rem;font-weight:600}#ps{font-size:.92rem;color:var(--ink2)}
+.pr{height:4px;background:var(--sky);border-radius:2px;margin-top:6px}.pr b{display:block;height:100%;width:0;background:var(--leaf2);border-radius:2px}
+#eq{display:none;margin-left:8px;vertical-align:middle}.playing #eq{display:inline-flex}#eq i{display:inline-block;width:3px;height:12px;margin:0 1px;background:var(--leaf2);animation:eq .9s infinite alternate}#eq i:nth-child(2){animation-delay:.3s}#eq i:nth-child(3){animation-delay:.6s}@keyframes eq{from{transform:scaleY(.3)}}
+.vl input{width:88px;height:44px;accent-color:var(--leaf)}.sr{position:absolute;left:-9999px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{@page{margin:14mm}body{background:#fff;padding:0}body::after,.sky,#cf,#bs,#sp,#pl,.pg:not(#p8){display:none!important}#p8{display:block!important;padding:0}#p8>:not(#bibw){display:none!important}#bibw svg{width:105mm;max-width:none}.bib{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style></head><body>
+<div class="sky" aria-hidden="true"></div><div id="bs" aria-hidden="true"></div><div id="sp" role="status"></div><div id="cf" aria-hidden="true"></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fc7ea"/><stop offset=".6" stop-color="#cfe9f0"/><stop offset="1" stop-color="#fff1c9"/></linearGradient>
+<linearGradient id="skd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7d9fdb"/><stop offset=".55" stop-color="#c9b6e4"/><stop offset="1" stop-color="#ffd9a8"/></linearGradient>
+<linearGradient id="pd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#86c9dc"/><stop offset="1" stop-color="#5aa6a3"/></linearGradient>
+<radialGradient id="gl"><stop offset="0" stop-color="#ffe9a0" stop-opacity=".7"/><stop offset="1" stop-color="#ffe9a0" stop-opacity="0"/></radialGradient>
+<pattern id="ck" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#fffdf4"/><rect width="5" height="5" fill="#1f3b52"/><rect x="5" y="5" width="5" height="5" fill="#1f3b52"/></pattern>
+<filter id="pnt" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="7"/></filter>
+</defs></svg>
+
+<main>
+<section class="pg on" id="p1"><div class="art" id="a1"></div>
+<h1>Your First Little 6K</h1>
+<p class="lead">Hey, little Koala. Someone all the way across the ocean made a tiny something for you.</p>
+<div id="f"><label for="code">Enter the secret code to come in</label>
+<div class="row"><input id="code" inputmode="numeric" maxlength="12" aria-describedby="err"><button class="b" type="button" id="ob1">Open the envelope</button></div><div id="err" role="status"></div></div><p class="note">Psst. Oso likes being tapped.</p></section>
+
+<section class="pg" id="p2"><div class="art" id="a2"></div><h2>A letter for you</h2><div class="letter" id="let"></div></section>
+
+<section class="pg" id="p3"><div class="art" id="a3"></div><h2>The six kilometers</h2><p class="lead">Drag the slider or take a step, and Koala runs. Tap Koala for a little cheer.</p>
+<div class="dt"><label for="rd">Race day, if you know it</label><div class="row"><input id="rd" type="date" min="2026-01-01" max="2030-12-31"><button class="b b2" id="rdx" type="button">Clear</button></div><p class="note" id="rdn">Leave it blank if you haven’t decided yet.</p></div>
+<div class="run"><input id="km" type="range" min="0" max="6" step="1" value="0" aria-label="Kilometers run"><div class="row"><button class="b" id="st">Take a step</button><span class="note" id="kmv"></span></div></div><div class="pn"><h3 id="jt"></h3><p id="jp" style="margin:0"></p><p id="jx" class="note" style="margin:8px 0 0"></p></div><p class="note">Just a playful pretend run. Nothing here tracks you or your pace.</p>
+<p style="font-family:Newsreader,Georgia,serif;font-size:1.35rem;font-style:italic">Somewhere in Indonesia, Oso is cheering for every single step.</p></section>
+
+<section class="pg" id="p4"><div class="art" id="a4"></div><h2>Before you go</h2>
+<div class="bar"><b id="pb"></b></div><p class="note" id="pt"></p><div id="cl"></div>
+<div id="done" hidden>Look at you, all ready for your little adventure. Oso is rooting for you.</div>
+<button class="b b2" id="rs0">Reset</button><button class="b" id="cc">Copy checklist</button>
+<p class="note">A 6K may not need an energy gel at all. A familiar carb rich dinner is plenty, no need to overdo it. Safety and comfort matter more than pace.</p></section>
+
+<section class="pg" id="p5"><div class="art" id="a5"></div><h2>A little prayer</h2>
+<div class="txt fade" id="pr"></div></section>
+
+<section class="pg" id="p6"><div class="art" id="a6"></div><h2>If the road gets hard</h2><p class="note">The little tune at the bottom is an original instrumental made right in your browser. It borrows its mood from the big sky feeling of Coldplay and the warm soul of Olivia Dean, but it is not their music.</p>
+<div class="sv"><h3>If you feel tired</h3><p>Slow down or walk. You don’t need to prove anything to anyone. If you feel dizzy, have chest pain, or feel unusually unwell, stop and seek help.</p></div>
+<div class="sv"><h3>If you get nervous</h3><p>Take a few slow breaths, relax your shoulders, and focus on the next small step instead of the whole 6K.</p></div>
+<div class="sv"><h3>If you start comparing yourself</h3><p>Remember that this is your first 6K. Other people’s pace is their story. This one is yours.</p></div>
+<div class="sv"><h3>If you finish</h3><p>Smile, breathe, drink some water, and give yourself credit. You did something you hadn’t done before.</p></div>
+<h3 style="margin-top:1.4em">A few quiet notes</h3>
+<p class="note">Wear shoes and clothes you have already run in. Race day is not the time to try anything new.<br>Start slower than feels necessary. The first kilometer should feel easy.<br>Walking breaks are part of running. Many first time runners use them.</p></section>
+
+<section class="pg" id="p7"><div class="art" id="a7"></div><h2>Not just yet, Koala.</h2>
+<p>This last page is waiting for the end of your race day.</p>
+<p>When it’s over, come back and tap the button. There’s a small keepsake and one last message from Oso. Finished, walked, or stopped early, it is waiting for you either way.</p>
+<button class="b" id="fb">My race day is done</button>
+<p class="note">This is a self confirmed page. Nothing here tracks your race, so it simply trusts you.</p></section>
+
+<section class="pg" id="p8"><div class="art" id="a8"></div><h2 class="rv" id="h8" style="--d:1s"></h2>
+<div class="txt" id="fin"></div>
+<div id="bibw" class="rv" data-late></div>
+<div class="rv" data-late><button class="b" onclick="print()">Save / print my keepsake</button><button class="b b2" id="cm">Copy my little message</button>
+<p class="note">In the print window, choose Save as PDF. If nothing opens, a screenshot of the card works too.</p></div></section>
+</main>
+
+<div id="pl" role="region" aria-label="Music player">
+<button class="pb" id="pp" aria-pressed="false" aria-label="Play music"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path id="pi" d="M8 5v14l11-7z" fill="currentColor"/></svg></button>
+<div class="pi"><div class="pt">Little Sunrise<span id="eq" aria-hidden="true"><i></i><i></i><i></i></span></div><div id="ps" role="status">Press play to listen</div><div class="pr"><b id="pg"></b></div></div>
+<label class="vl"><span class="sr">Volume</span><input id="vol" type="range" min="0" max="1" step=".01" value=".6"></label></div>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const rm=matchMedia("(prefers-reduced-motion:reduce)").matches;
+let unlocked=false,sd=1;const R=()=>(sd=(sd*16807)%2147483647)/2147483647;
+
+/* ---------- copy ---------- */
+const LET=`Dear Koala,
+
+I made you a little something.
+
+Your first 6K is coming, and I wish I could be there, running beside you or waiting at the finish line.
+Since I can’t, this is my small way of being part of it.
+It comes all the way from Indonesia to Mexico, with someone quietly cheering on the other end.
+
+Do you remember when you first started running, partly because you needed something to quiet your mind?
+
+I hope you know that every run since then counts.
+Not because you have to prove anything to anyone,
+but because you kept showing up for yourself,
+even on the days when your mind felt a little too loud.
+
+And now, here you are, getting ready for your first 6K.
+
+You do not have to be fast. You do not have to run it perfectly.
+Take it one step at a time, breathe when you need to, and walk if your body asks you to.
+Six kilometers is a lot to hold in your head at once, so just think about the next step, and then the next one.
+
+Whatever happens on race day, I hope you feel proud of the person who decided to begin.
+
+I will be cheering for you from far away, with all my heart.
+
+With a big hug across the ocean,
+Oso`;
+const PRAY=`Before the sun comes up over your race day, I hope the world is gentle with you.
+
+May the road be kind to your feet.
+May your breathing stay steady and your mind stay calm, even when it gets hard.
+
+May you find a few small reasons to smile along the way, and a friendly face when you need one.
+
+Your wellbeing matters more than any number or finish time. If the day asks you to slow down, or to stop, listening to your body is part of being brave.
+
+I hope you stay safe, feel well, and get home with a peaceful heart and tired, proud legs.
+
+If you look up at the sky that day, sun or moon, know that somewhere far away, under a different sky, someone is sending you the warmest wishes.
+
+You run your 6K. I will send you a little sunshine from here.
+
+Con mucho cariño, from Indonesia to Mexico.`;
+const END=`However today went, I hope you are smiling a little.
+
+Maybe you ran every step. Maybe you walked some of it, or stopped early because your body asked you to. All of that is okay, and I am proud of you either way.
+
+You started something new, and you kept showing up long after the first day. A race is only one day, and only a small part of what you have been building.
+
+I still remember why you started, a little space to breathe. I hope today gave you some of that too.
+
+I could not be there to hand you a medal, so I made you one. It is in the keepsake below.
+
+Now rest, eat something good, and be kind to yourself. You have earned it.
+
+I am proud of you, mi corazón.
+
+With love,
+Oso, somewhere under the same sky.`;
+const J=[["KM 0","The little beginning","Every great adventure starts with showing up. Take a deep breath, loosen your shoulders, and remember why you wanted to try this."],["KM 1 to 2","Find your rhythm","No need to race anyone, little Koala. Start at a comfortable pace. You’re here to enjoy your own journey."],["KM 3 to 4","One step at a time","Feeling tired? It’s okay to slow down or walk. Drink some water when needed. Taking care of yourself is part of the adventure, too."],["KM 5 to 6","Look how far you’ve come","You’re doing it! Keep a pace that feels right for you. And when you reach that finish line, take a moment to be proud of yourself."]];
+const CL=[["The night before",["Lay out your running clothes and comfy socks.","Get your running shoes ready, and your race bib if you have one.","Charge your phone and check the route and start time.","Have a carb rich dinner you already know your body likes, like rice, pasta, noodles or potatoes.","Try for an early night and a full night of sleep."]],["Before the run",["Have a familiar, easy to digest meal or snack.","Bring water, or check where the water stations are.","Pack a cap, sunscreen, and a small towel if you like.","Bring a small sweet snack, or an energy gel if it feels right for you.","Use the bathroom and warm up gently."]],["A little reminder",["Breathe, take it easy, and listen to your body."]]];
+
+/* ---------- illustration kit ---------- */
+const SM=s=>rm?"":s;
+const rot=(cx,cy,v,dur,kt)=>SM(`<animateTransform attributeName="transform" type="rotate" values="${v.map(a=>`${a} ${cx} ${cy}`).join(";")}" ${kt?`keyTimes="${kt}"`:""} dur="${dur}s" repeatCount="indefinite"/>`);
+function C(k,x,y,s,o){
+ o={la:[-44,-34],ra:[44,-34],t:0,e:0,st:12,rot:0,w:0,m:0,...o};
+ const K=k=="k",fu=K?"#a9b3c0":"#a8734d",fl=K?"#d6dde6":"#cb9a70",sh="#6fb0dc",ink="#2a2030";
+ let g=`<g class="tap" tabindex="0" role="button" data-w="${k}" aria-label="${K?"Koala":"Oso"}, tap to say hi"><g transform="translate(${x} ${y}) scale(${s}) rotate(${o.rot})"><ellipse cy="2" rx="44" ry="6" fill="#2d4a3a" opacity=".22"/><g>${SM('<animateTransform attributeName="transform" type="translate" values="0 0;0 -2.5;0 0" dur="2.6s" repeatCount="indefinite"/>')}`;
+ for(const d of [-1,1]){const fx=d*(15+o.st);g+=`<path d="M${d*13} -40L${fx} -9" stroke="${fu}" stroke-width="16" stroke-linecap="round"/><path d="M${fx-13} -2q-1-14 9-14h8q7 0 8 14z" fill="#fffdf4"/><path d="M${fx-14} -2h28v5h-28z" fill="#4f9a6b"/>`}
+ g+=`<path d="M-26 -50h52l3 14h-58z" fill="#2f5d7c"/><path d="M-27 -82q27-9 54 0l4 36q-31 9-62 0z" fill="${sh}"/><path d="M-30 -62q30 7 60 0v5q-30 7-60 0z" fill="#fffdf4" opacity=".9"/>`;
+ g+=o.m?`<path d="M-9 -80L-1 -53" stroke="#6fb0dc" stroke-width="5"/><path d="M9 -80L1 -53" stroke="#2f7752" stroke-width="5"/><circle cy="-47" r="9.5" fill="#f2c85b" stroke="#c99a2e" stroke-width="2"/><text y="-44" text-anchor="middle" font-size="8" font-weight="700" fill="#8a5d00" font-family="Arial">6K</text>`:K?`<text y="-66" text-anchor="middle" font-size="11" font-weight="700" fill="#1f3b52" font-family="Arial">6</text>`:`<circle cx="-14" cy="-64" r="5" fill="#f2c85b"/>`;
+ [[-1,o.la],[1,o.ra]].forEach(([d,h],i)=>{const sx=d*27;g+=`<g>${o.w==1||(o.w==2&&!i)?rot(sx,-72,i?[0,-12,0]:[0,12,0],1.1):""}<path d="M${sx} -72Q${(sx+h[0])/2+d*8} ${(-72+h[1])/2+10} ${h[0]} ${h[1]}" stroke="${fu}" stroke-width="14" stroke-linecap="round" fill="none"/><circle cx="${sx}" cy="-72" r="10" fill="${sh}"/></g>`});
+ const up=o.e==2?-3:0,sx2=o.e==2?2:0,ey=x=>o.e==1?`<path d="M${x-5} -108q5-7 10 0" stroke="${ink}" stroke-width="2.6" fill="none" stroke-linecap="round"/>`:`<ellipse cx="${x+sx2}" cy="${-109+up}" rx="3.9" ry="3.9" fill="${ink}">${SM(`<animate attributeName="ry" values="3.9;3.9;.5;3.9" keyTimes="0;.92;.96;1" dur="${(4+Math.random()*1.5).toFixed(1)}s" repeatCount="indefinite"/>`)}</ellipse><circle cx="${x+sx2+1.2}" cy="${-110.5+up}" r="1.2" fill="#fffdf4"/>`,
+ mo=o.e==1?`<path d="M-8 -84q8 13 16 0z" fill="#6b2f36"/>`:`<path d="M-7 -84q7 6 14 0" stroke="${ink}" stroke-width="2" fill="none" stroke-linecap="round"/>`;
+ g+=`<g transform="rotate(${o.t} 0 -76)">`;
+ if(K)g+=`<g>${rot(-35,-120,[0,0,-9,5,0],4.5,"0;.8;.86;.92;1")}<circle cx="-35" cy="-120" r="20" fill="${fu}"/><circle cx="-35" cy="-120" r="12" fill="#efe3da"/></g><g>${rot(35,-120,[0,0,9,-5,0],4.5,"0;.8;.86;.92;1")}<circle cx="35" cy="-120" r="20" fill="${fu}"/><circle cx="35" cy="-120" r="12" fill="#efe3da"/></g><path d="M-40 -124l4 6M-33 -126l2 8M40 -124l-4 6M33 -126l-2 8" stroke="#c4b3a6" stroke-width="1.5"/><ellipse cy="-104" rx="38" ry="32" fill="${fu}"/><ellipse cx="-9" cy="-117" rx="22" ry="11" fill="${fl}" opacity=".35"/><path d="M-34 -119Q0 -135 34 -119" stroke="#f2c85b" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="-25" cy="-95" r="5.5" fill="#e79a8f" opacity=".45"/><circle cx="25" cy="-95" r="5.5" fill="#e79a8f" opacity=".45"/>${ey(-17)}${ey(17)}<ellipse cy="-100" rx="9.5" ry="12" fill="#2f2c3a"/><ellipse cx="-3" cy="-105" rx="3" ry="4" fill="#fff" opacity=".4"/>${mo}`;
+ else g+=`<g>${rot(-28,-128,[0,0,-9,5,0],5,"0;.7;.76;.84;1")}<circle cx="-28" cy="-128" r="14" fill="${fu}"/><circle cx="-28" cy="-128" r="7" fill="#c08f66"/></g><circle cx="28" cy="-128" r="14" fill="${fu}"/><circle cx="28" cy="-128" r="7" fill="#c08f66"/><ellipse cy="-104" rx="37" ry="32" fill="${fu}"/><ellipse cx="-9" cy="-117" rx="22" ry="10" fill="${fl}" opacity=".4"/><circle cx="-26" cy="-95" r="5.5" fill="#e79a8f" opacity=".45"/><circle cx="26" cy="-95" r="5.5" fill="#e79a8f" opacity=".45"/><ellipse cy="-93" rx="17" ry="13" fill="#efd9b8"/>${ey(-16)}${ey(16)}<ellipse cy="-98" rx="6.5" ry="4.5" fill="#2b1a12"/>${mo}`;
+ return g+"</g></g></g></g>"}
+const SR=(n,w,h,s)=>{sd=s;let o="";for(let i=0;i<n;i++){const x=R()*w|0,y=R()*h|0;o+=`<circle cx="${x}" cy="${y}" r="${(.6+R()*1.1).toFixed(1)}" fill="#fffdf4" opacity="${(.4+R()*.5).toFixed(2)}"${i%3?"":' class="tw"'}/>`}return o};
+const MN=(x,y,r)=>`<circle cx="${x}" cy="${y}" r="${r*3}" fill="url(#gl)"/><path d="M${x} ${y-r}A${r} ${r} 0 0 0 ${x} ${y+r}A${r*1.4} ${r*1.4} 0 0 1 ${x} ${y-r}Z" fill="#fff0b8"/>`;
+const SH=(x,y,r,s)=>`<g transform="translate(${x} ${y}) rotate(${r}) scale(${s})"><path d="M-22 0q-2-18 12-20h10q6 0 12 8q12 2 14 12z" fill="#fffdf4" stroke="#c9d6dd"/><path d="M-23 0h50v6h-50z" fill="#4f9a6b"/><path d="M-6-18l6 8M0-20l6 8" stroke="#6fb0dc" stroke-width="2"/></g>`;
+const DB=(x0,x1,y0,y1,n,c,s)=>{sd=s;let o="";for(let i=0;i<n;i++){const x=(x0+R()*(x1-x0))|0,y=(y0+R()*(y1-y0))|0;o+=`<ellipse cx="${x}" cy="${y}" rx="${(3+R()*6).toFixed(1)}" ry="${(1+R()*1.6).toFixed(1)}" transform="rotate(${(R()*60-30)|0} ${x} ${y})" fill="${c[i%c.length]}" opacity=".6"/>`}return o};
+const POP=(n,x0,x1,y0,y1,s)=>{sd=s;let o="";for(let i=0;i<n;i++)o+=`<circle cx="${(x0+R()*(x1-x0))|0}" cy="${(y0+R()*(y1-y0))|0}" r="${(1.4+R()*1.8).toFixed(1)}" fill="${["#e8553d","#f2c85b","#fffdf4","#e8553d"][i%4]}"/>`;return o};
+const CLD=(x,y,s,d)=>`<g class="cld" style="animation-duration:${d}s"><g transform="translate(${x} ${y}) scale(${s})" fill="#fff" opacity=".92"><ellipse rx="30" ry="10"/><ellipse cx="-18" cy="3" rx="20" ry="8"/><ellipse cx="20" cy="4" rx="22" ry="8"/><ellipse cx="2" cy="-7" rx="16" ry="8"/></g></g>`;
+const HL=(y,c,a=12)=>`<path d="M0 ${y}Q70 ${y-a} 140 ${y-3}T270 ${y-5}T360 ${y-a/2}V300H0Z" fill="${c}" filter="url(#pnt)"/>`;
+const SUN=(x,y,r)=>`<circle cx="${x}" cy="${y}" r="${r*3}" fill="url(#gl)"/><circle cx="${x}" cy="${y}" r="${r}" fill="#fff4b8"/>`;
+const LILY=(x,y,s,f)=>`<g class="lp"><g transform="translate(${x} ${y}) scale(${s})"><ellipse rx="22" ry="7" fill="#4f9a6b"/><path d="M0 0L22 -2L22 3Z" fill="#7fc3d8"/><ellipse cx="-4" cy="-1" rx="12" ry="3" fill="#73b886" opacity=".7"/>${f?`<g transform="translate(6 -6)">${[-40,-20,0,20,40].map(a=>`<ellipse cy="-5" rx="3.2" ry="7" transform="rotate(${a})" fill="#d6c6ee"/>`).join("")}<circle r="3" fill="#f2c85b"/></g>`:""}</g></g>`;
+const WIL=(x,y,s,s0)=>{sd=s0;let o=`<g transform="translate(${x} ${y}) scale(${s})" filter="url(#pnt)"><path d="M-5 0Q-3 -40 0 -70L6 -70Q4 -40 8 0Z" fill="#6b5a3c"/>`;for(let i=0;i<16;i++){const a=-40+i*5.5,sx=a*.9,l=40+R()*30;o+=`<path d="M${sx*.3} -68Q${sx} -85 ${sx*1.4} ${-68+l}" stroke="${["#6fae7a","#8cc58b","#4f9a6b"][i%3]}" stroke-width="3" fill="none" stroke-linecap="round" opacity=".85"/>`}return o+"</g>"};
+const BUNT=(x1,y1,x2,y2,n,sag=24)=>{const cs=["#f2c85b","#6fb0dc","#4f9a6b","#e8553d","#c8b5e6"],cy=(y1+y2)/2+sag*2,cx=(x1+x2)/2;let o=`<path d="M${x1} ${y1}Q${cx} ${cy} ${x2} ${y2}" stroke="#7b6a4a" fill="none" stroke-width="1.5"/>`;for(let i=1;i<=n;i++){const t=i/(n+1),x=(1-t)*(1-t)*x1+2*(1-t)*t*cx+t*t*x2,y=(1-t)*(1-t)*y1+2*(1-t)*t*cy+t*t*y2;o+=`<path d="M${x-6} ${y}h12l-6 13z" fill="${cs[i%5]}"/>`}return o};
+const BF=(x,y)=>`<g>${SM('<animateMotion dur="9s" repeatCount="indefinite" path="M0 0C25 -20 50 -10 60 10S30 35 5 25S-20 0 0 0Z"/>')}<g transform="translate(${x} ${y})"><ellipse class="wg" cx="-3" rx="4.5" ry="3.2" fill="#f2a63d"/><ellipse class="wg r" cx="3" rx="4.5" ry="3.2" fill="#f2a63d"/><rect x="-.6" y="-2" width="1.2" height="5" fill="#5a4a3a"/></g></g>`;
+const A=(w,h,l,i,x="",g="sk")=>`<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="${l}" ${x}><rect width="${w}" height="${h}" fill="url(#${g})"/>${i}</svg>`;
+const ARCH=(a,b,y0,g)=>`<rect x="${a}" y="${y0}" width="4" height="${g-y0}" fill="#8a7451"/><rect x="${b}" y="${y0}" width="4" height="${g-y0}" fill="#8a7451"/><rect x="${a}" y="${y0}" width="${b-a+4}" height="18" fill="url(#ck)" stroke="#1f3b52"/>`;
+const SC={
+1:()=>A(360,250,"Oso leaves a small letter on a stone step beside a meadow and willow tree",`${SUN(300,46,20)}${CLD(70,40,1,40)}${CLD(210,70,.8,55)}${HL(160,"#a7d6a2",16)}${HL(185,"#7fc287",10)}${WIL(306,200,1.1,5)}${HL(215,"#5fa874",8)}${DB(0,360,205,250,40,["#4f9a6b","#8cc58b","#3f8a63"],3)}${POP(26,0,360,215,248,4)}<rect x="180" y="214" width="76" height="14" rx="3" fill="#b4c1cc"/>${BF(215,150)}${C("o",95,242,1,{ra:[76,-30],la:[-46,-58],t:6,rot:5,w:2})}<g id="env"><rect x="196" y="192" width="46" height="24" fill="#fffdf2" stroke="#c9b98f"/><rect class="paper" x="201" y="196" width="36" height="16" fill="#fff" stroke="#e3d8b3" stroke-width=".8"/><path d="M196 216L219 202L242 216" stroke="#c9b98f" fill="none"/><polygon class="flap" points="196,192 242,192 219,208" fill="#f2e8c9" stroke="#c9b98f"/></g>`,'id="s1"'),
+2:()=>A(360,150,"A sunny lily pond with floating pads and flowers",`${SUN(300,34,14)}${CLD(80,30,.8,50)}${CLD(220,52,.6,60)}${HL(70,"#9bcf9a",8)}${WIL(40,92,.8,8)}<rect y="76" width="360" height="74" fill="url(#pd)" filter="url(#pnt)"/>${DB(0,360,80,148,50,["#fff4b8","#9fd0ee","#c8b5e6","#5aa6a3"],6)}${LILY(110,108,1,1)}${LILY(190,128,1.2,0)}${LILY(270,104,1,1)}${LILY(60,132,.9,0)}${BF(160,60)}`),
+3:()=>A(360,175,"Koala jogs along a sandy path through a poppy meadow",`${SUN(310,34,14)}${CLD(90,34,.7,50)}${HL(104,"#a7d6a2",10)}${HL(122,"#7fc287",8)}<path d="M-10 156Q120 140 240 152T380 146" stroke="#efdfae" stroke-width="30" fill="none" filter="url(#pnt)"/><path d="M0 175V160Q120 168 240 164T360 168V175Z" fill="#6bb27a"/>${POP(60,0,360,118,140,11)}${POP(30,0,360,160,174,12)}${[0,1,2,3,4,5,6].map(k=>`<rect x="${52+k*40}" y="108" width="2" height="26" fill="#7b6a4a"/><path d="M${54+k*40} 108h12l-3 4 3 4h-12z" fill="${k==6?"#e8553d":"#2f7752"}"/>`).join("")}<g id="kz">${C("k",40,172,.55,{la:[-38,-52],ra:[38,-34],st:14,t:3})}</g>`),
+4:()=>A(360,230,"Koala holds up a running shoe in a sunny garden",`${SUN(60,44,18)}${CLD(220,40,.9,50)}${HL(120,"#a7d6a2",12)}${HL(150,"#7fc287",8)}<rect y="95" width="360" height="5" fill="#d9b98a"/><rect y="118" width="360" height="5" fill="#d9b98a"/>${[20,100,180,260,340].map(x=>`<rect x="${x}" y="82" width="9" height="56" rx="2" fill="#e3c08f"/>`).join("")}<g transform="rotate(-4 280 100)"><rect x="262" y="72" width="36" height="44" fill="#fffdf4" stroke="#c9b98f"/><path d="M270 96l6 6 12-14" stroke="#2f7752" stroke-width="3" fill="none"/></g>${HL(190,"#5fa874",6)}${DB(0,360,185,230,40,["#4f9a6b","#8cc58b","#3f8a63"],14)}${POP(24,0,360,190,225,15)}${C("k",150,214,.95,{ra:[50,-92],la:[-44,-36],t:7})}${SH(200,120,-28,.9)}${SH(268,214,0,.9)}${SH(312,216,8,.8)}<rect x="22" y="190" width="18" height="34" rx="5" fill="#6fb0dc"/><rect x="26" y="184" width="10" height="8" fill="#f2c85b"/>${BF(110,70)}`),
+5:()=>A(360,250,"Koala and Oso at a pond under a wide dusk sky with a pale crescent moon",`${SR(26,360,90,31)}${MN(276,56,22)}${CLD(80,70,1,60)}${CLD(240,110,.8,45)}${HL(170,"#9fb8d8",10)}${WIL(40,200,1,9)}<rect y="196" width="360" height="54" fill="url(#pd)" filter="url(#pnt)"/><ellipse cx="186" cy="228" rx="112" ry="16" fill="#5fa874"/>${LILY(60,240,.9,1)}${LILY(318,238,1,0)}${C("k",140,226,.92,{t:9,e:2})}${C("o",232,226,1,{t:7,e:2})}`,"","skd"),
+6:()=>A(360,230,"Koala stretches on a country path at sunrise",`${SUN(180,150,30)}${CLD(60,44,1,50)}${CLD(280,70,.8,60)}${HL(160,"#a7d6a2",14)}${HL(180,"#7fc287",10)}<path d="M-10 214Q120 198 240 210T380 204" stroke="#efdfae" stroke-width="34" fill="none" filter="url(#pnt)"/>${POP(50,0,360,176,196,21)}${C("k",180,220,1.05,{la:[-30,-150],ra:[30,-150],e:1,rot:-3,st:8})}${BF(80,120)}`),
+7:()=>A(360,230,"Koala and Oso wait at a finish line decorated with bunting",`${SUN(60,40,16)}${CLD(180,40,.9,55)}${HL(150,"#a7d6a2",12)}${HL(176,"#7fc287",8)}${ARCH(215,305,60,200)}${BUNT(20,70,215,76,6)}${BUNT(305,76,350,70,2,12)}${HL(196,"#5fa874",6)}${POP(40,0,360,200,226,31)}${C("k",70,222,.82,{la:[-14,-52],ra:[14,-52]})}${C("o",150,222,.88,{la:[-48,-98],t:-4,w:2})}`),
+8:()=>A(360,250,"Koala wearing a medal stands beside Oso under a warm sun",`${SUN(180,70,28)}${CLD(60,50,1,45)}${CLD(300,80,.8,60)}${HL(150,"#a7d6a2",14)}${HL(185,"#7fc287",10)}${BUNT(10,40,350,40,9,26)}${HL(212,"#5fa874",8)}${POP(46,0,360,214,246,51)}${C("k",140,238,1,{m:1,e:1,la:[-44,-34],ra:[44,-34]})}${C("o",232,238,1,{e:1,w:2,la:[-48,-98]})}${BF(300,150)}`)};
+const BIB=()=>`<svg class="bib" viewBox="0 0 340 460" role="img" aria-label="Keepsake card: Koala wearing a first 6K medal"><rect x="8" y="8" width="324" height="444" rx="22" fill="#fffdf4" stroke="#1f3b52" stroke-width="3"/><rect x="18" y="18" width="304" height="424" rx="15" fill="none" stroke="#4f9a6b" stroke-width="1.5" stroke-dasharray="2 6" stroke-linecap="round"/>${BUNT(34,44,306,44,7,18)}<text x="170" y="104" text-anchor="middle" font-size="26" font-weight="600">MY FIRST LITTLE 6K</text><circle cx="170" cy="230" r="92" fill="#fff4b8" opacity=".8"/><path d="M18 372Q90 338 170 362T322 346V420Q322 442 300 442H40Q18 442 18 420Z" fill="#a7d6a2"/><path d="M18 400Q100 376 190 396T322 388V420Q322 442 300 442H40Q18 442 18 420Z" fill="#6bb27a"/>${POP(14,34,306,372,392,7)}${C("k",170,380,1.45,{m:1,e:1,la:[-44,-100],ra:[44,-100],w:0})}<text x="170" y="418" text-anchor="middle" font-size="19" font-style="italic" style="fill:#1f3b52">one brave step at a time</text><text id="bd" class="sn" x="170" y="436" text-anchor="middle" font-size="15" style="fill:#1f3b52"></text></svg>`;
+const SAY={k:["Hi, I’m ready to run!","Deep breath, here we go.","One step at a time.","Let’s go, Oso!","I can do this."],o:["You can do it, little Koala!","I’m cheering for you!","Don’t forget your water.","Proud of you already.","Mi corazón, you’ve got this."]};
+let sayi={k:0,o:0},bt;
+function burst(x,y){const cols=["#f2c85b","#6fb0dc","#4f9a6b","#c8b5e6","#e8553d"];for(let i=0;i<10;i++){const e=document.createElement("i"),a=Math.PI*2*i/10+Math.random()*.5,d=36+Math.random()*34;e.style.cssText=`left:${x}px;top:${y}px;background:${cols[i%5]};--dx:${Math.cos(a)*d}px;--dy:${Math.sin(a)*d-20}px`;$("#bs").append(e);setTimeout(()=>e.remove(),900)}}
+function react(el){const r=el.getBoundingClientRect(),w=el.dataset.w;el.classList.remove("hop");void el.getBoundingClientRect();el.classList.add("hop");
+ const b=$("#sp");b.textContent=SAY[w][sayi[w]++%SAY[w].length];b.style.left=Math.min(Math.max(r.left+r.width/2,120),innerWidth-120)+"px";b.style.top=Math.max(r.top-6,70)+"px";b.classList.add("on");clearTimeout(bt);bt=setTimeout(()=>b.classList.remove("on"),2400);
+ if(!rm)burst(r.left+r.width/2,r.top+r.height*.3)}
+document.addEventListener("click",e=>{const t=e.target.closest(".tap");if(t)react(t)});
+document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.classList&&e.target.classList.contains("tap")){e.preventDefault();react(e.target)}});
+
+/* ---------- page flow ---------- */
+function go(n){if(n===8&&!unlocked)n=7;if(n===1){$("#s1").classList.remove("open");$("#err").textContent=""}$$(".pg").forEach((p,i)=>p.classList.toggle("on",i+1===n));scrollTo(0,0);if(n===8)fin()}
+$$(".pg").forEach((p,i)=>{const n=i+1;if(n<2)return;const d=document.createElement("div");d.className="nv";
+ d.innerHTML=`<button class="b b2">Back</button>`+(n<7?`<button class="b">Next</button>`:"");
+ d.children[0].onclick=()=>go(n-1);if(d.children[1])d.children[1].onclick=()=>go(n+1);p.append(d)});
+for(let k=1;k<=8;k++)$("#a"+k).innerHTML=SC[k]();
+$("#bibw").innerHTML=BIB();
+
+function tryCode(){
+ if($("#code").value.trim().toLowerCase()==="0615"){$("#err").textContent="";$("#s1").classList.add("open");setTimeout(()=>go(2),rm?200:1700)}
+ else $("#err").textContent="That is not quite the code. Try once more, little Koala."}
+$("#ob1").onclick=tryCode;$("#code").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();tryCode()}});
+$("#let").innerHTML=LET.split("\n\n").map((t,i)=>`<p class="fade pre${t.startsWith("Do you remember")?" q":""}${t.startsWith("With a big")?" sig":""}">${t}</p>`).join("");
+$("#pr").className="";$("#pr").innerHTML=PRAY.split("\n\n").map(t=>`<p class="fade pre">${t}</p>`).join("");
+const io="IntersectionObserver"in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.2}):null;
+$$(".fade").forEach(e=>io?io.observe(e):e.classList.add("in"));
+
+function cp(k){k=Math.max(0,Math.min(6,k|0));$("#km").value=k;const i=k<1?0:k<3?1:k<5?2:3;$("#kz").style.transform=`translateX(${k*40}px)`;$("#jt").textContent=J[i][0]+": "+J[i][1];$("#jp").textContent=J[i][2];
+ $("#jx").textContent=k==6?"That is the pretend finish line. Your real one is yours to find, at your own pace.":"";
+ $("#km").setAttribute("aria-valuetext","Kilometer "+k+" of 6");$("#kmv").textContent="Kilometer "+k+" of 6";$("#st").textContent=k<6?"Take a step":"Start again";
+ if(k==6&&!rm){const r=$("#kz").getBoundingClientRect();burst(r.left+r.width/2,r.top+10)}}
+$("#km").oninput=e=>cp(+e.target.value);$("#st").onclick=()=>cp(+$("#km").value<6?+$("#km").value+1:0);cp(0);
+function setDate(){const v=$("#rd").value,n=$("#rdn");let t="";
+ if(v){const d=new Date(v+"T12:00:00");
+  if(isNaN(d)||v<"2026-01-01"||v>"2030-12-31"){n.textContent="That date doesn’t look right. Please pick it again.";$("#rd").value="";try{sessionStorage.removeItem("rd6k")}catch(_){}}
+  else{t=d.toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"});n.textContent="Race day: "+t;try{sessionStorage.setItem("rd6k",v)}catch(_){}}}
+ else{n.textContent="Leave it blank if you haven’t decided yet.";try{sessionStorage.removeItem("rd6k")}catch(_){}}
+ const b=$("#bd");if(b)b.textContent=t.toUpperCase()}
+$("#rd").onchange=setDate;$("#rdx").onclick=()=>{$("#rd").value="";setDate()};
+try{const s=sessionStorage.getItem("rd6k");if(s)$("#rd").value=s}catch(_){}setDate();
+
+let saved=[];try{saved=JSON.parse(sessionStorage.getItem("c6k")||"[]")}catch(_){}
+let ix=0;$("#cl").innerHTML=CL.map(([h,a])=>`<h3 style="margin-top:1.2em">${h}</h3>`+a.map(t=>`<label class="it"><input type="checkbox" data-i="${ix}" ${saved.includes(ix++)?"checked":""}><span>${t}</span></label>`).join("")).join("");
+function pr(){const b=$$("#cl input"),k=b.filter(x=>x.checked).length;$("#pb").style.width=100*k/b.length+"%";$("#pt").textContent=k+" of "+b.length+" ready";$("#done").hidden=k<b.length;
+ try{sessionStorage.setItem("c6k",JSON.stringify(b.filter(x=>x.checked).map(x=>+x.dataset.i)))}catch(_){}}
+$("#cl").onchange=e=>{if(e.target.checked&&!rm){const r=e.target.getBoundingClientRect();burst(r.left+14,r.top+14)}pr()};pr();
+$("#rs0").onclick=()=>{$$("#cl input").forEach(x=>x.checked=false);pr()};
+async function copy(t,b){try{await navigator.clipboard.writeText(t)}catch(e){const a=document.createElement("textarea");a.value=t;document.body.append(a);a.select();try{document.execCommand("copy")}catch(_){}a.remove()}const o=b.textContent;b.textContent="Copied";setTimeout(()=>b.textContent=o,1600)}
+$("#cc").onclick=e=>copy("My 6K checklist\n"+$$("#cl h3,#cl label").map(x=>x.tagName==="H3"?"\n"+x.textContent:(x.firstChild.checked?"[x] ":"[ ] ")+x.textContent).join("\n"),e.target);
+
+$("#fb").onclick=()=>{unlocked=true;go(8)};
+$("#cm").onclick=e=>copy(END,e.target);
+function fin(){$("#a8").innerHTML=SC[8]();$("#h8").textContent="You showed up, little Koala.";
+ const ps=END.split("\n\n");$("#fin").innerHTML=ps.map((t,i)=>`<p class="rv pre" style="--d:${2+i*.9}s">${t}</p>`).join("");
+ $$("[data-late]").forEach(e=>e.style.setProperty("--d",(2.5+ps.length*.9)+"s"));
+ $$("#h8,[data-late]").forEach(e=>{e.style.animation="none";void e.offsetWidth;e.style.animation=""});
+ if(rm)return;const c=$("#cf");c.innerHTML="";const cols=["#f2c85b","#6fb0dc","#4f9a6b","#c8b5e6","#e8553d"];
+ setTimeout(()=>{for(let i=0;i<40;i++){const e=document.createElement("i"),w=5+Math.random()*7;
+  e.style.cssText=`left:${Math.random()*100}%;width:${w}px;height:${i%2?w:w*1.8}px;border-radius:${i%3?2:50}%;background:${cols[i%5]};animation-duration:${5+Math.random()*4}s;animation-delay:${Math.random()*2}s`;c.append(e)}},600)}
+for(let i=0;i<16;i++){const e=document.createElement("i"),z=5+Math.random()*7;e.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${z}px;height:${z*.7}px;background:${["#c8b5e6","#f2c85b","#fffdf4","#9fd0ee"][i%4]};animation-delay:${Math.random()*8}s;animation-duration:${9+Math.random()*8}s`;$(".sky").append(e)}
+
+/* ---------- music: an original warm groove, Web Audio ---------- */
+const AC=window.AudioContext||window.webkitAudioContext;
+let ctx,bus,ar,master,noise,nt,sp,t0,tmr,vol=.6,playing=false;
+const E=60/92/2,LOOP=E*64,f=m=>440*Math.pow(2,(m-69)/12);
+const P=[{b:36,k:[52,59,64,67],a:[60,64,67,71]},{b:40,k:[55,59,62,64],a:[59,62,64,67]},{b:41,k:[53,57,60,64],a:[60,64,69,72]},{b:43,k:[55,59,62,69],a:[59,62,67,69]},{b:45,k:[57,60,64,67],a:[60,64,67,72]},{b:41,k:[53,57,60,64],a:[60,65,69,72]},{b:36,k:[55,60,64,67],a:[60,64,67,72]},{b:43,k:[55,59,62,67],a:[62,67,71,74]}];
+const ML=[[[0,76,5],[5,79,3]],[[0,76,4],[4,74,4]],[[0,72,3],[3,74,1],[4,76,4]],[[0,74,4],[4,71,4]],[[0,72,4],[4,76,3],[7,79,1]],[[0,77,4],[4,76,4]],[[0,79,3],[3,76,1],[4,72,4]],[[0,74,4],[4,71,2],[6,67,2]]];
+const AP=[0,1,2,3,2,1,3,2];
+function env(g,t,a,pk,d){g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(pk,t+a);g.gain.exponentialRampToValueAtTime(.0001,t+d)}
+function osc(type,fr,t,d,pk,a,dest,det=0){const o=ctx.createOscillator(),g=ctx.createGain();o.type=type;o.frequency.value=fr;o.detune.value=det;env(g,t,a,pk,d);o.connect(g);g.connect(dest||bus);o.start(t);o.stop(t+d+.1)}
+function ep(m,t,d,g,dest){osc("sine",f(m),t,d,g,.006,dest);osc("sine",f(m)*2,t,.35,g*.35,.004,dest);osc("triangle",f(m),t,d*.7,g*.3,.01,dest)}
+function pad(ms,t,d,g){const lp=ctx.createBiquadFilter();lp.type="lowpass";lp.frequency.value=700;lp.connect(bus);ms.forEach(m=>[-7,7].forEach(c=>osc("sawtooth",f(m),t,d,g,1.3,lp,c)))}
+function lead(m,t,d){const o=ctx.createOscillator(),o2=ctx.createOscillator(),g=ctx.createGain(),lf=ctx.createOscillator(),lg=ctx.createGain(),fl=ctx.createBiquadFilter();
+ o.type="triangle";o2.type="sine";o.frequency.value=o2.frequency.value=f(m);lf.frequency.value=5.4;lg.gain.value=9;lf.connect(lg);lg.connect(o.detune);lg.connect(o2.detune);fl.type="lowpass";fl.frequency.value=2600;
+ g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.1,t+.07);g.gain.setValueAtTime(.1,Math.max(t+.08,t+d-.25));g.gain.linearRampToValueAtTime(0,t+d);
+ o.connect(fl);o2.connect(fl);fl.connect(g);g.connect(bus);[o,o2,lf].forEach(x=>{x.start(t);x.stop(t+d+.05)})}
+function nz(t,fr,type,q,pk,d){const s=ctx.createBufferSource(),b=ctx.createBiquadFilter(),g=ctx.createGain();s.buffer=noise;b.type=type;b.frequency.value=fr;b.Q.value=q;env(g,t,.003,pk,d);s.connect(b);b.connect(g);g.connect(bus);s.start(t,Math.random());s.stop(t+d+.05)}
+function kick(t,g){const o=ctx.createOscillator(),e=ctx.createGain();o.frequency.setValueAtTime(130,t);o.frequency.exponentialRampToValueAtTime(42,t+.12);env(e,t,.004,g,.4);o.connect(e);e.connect(bus);o.start(t);o.stop(t+.45)}
+function sched(s,t){const bar=Math.floor(s/8)%8,st=s%8,c=P[bar],full=bar>=4,tt=t+(st%2?E*.18:0);
+ ep(c.a[AP[st]],tt,1.4,.05,ar);
+ if(st==0){c.k.forEach(m=>ep(m,t,2.4,.045));pad(c.k.map(m=>m-12),t,E*8+.8,full?.02:.012);osc("sine",f(c.b),t,E*5,.2,.02);osc("triangle",f(c.b),t,E*4,.05,.02);if(bar%4==0)nz(t,5200,"bandpass",1.2,.02,3)}
+ if(st==5){c.k.forEach(m=>ep(m,tt,.8,.03));osc("sine",f(c.b),t,E*1.5,.17,.01)}
+ if(st==7)osc("sine",f(c.b+7),t,E,.12,.01);
+ ML[bar].forEach(([b,m,d])=>{if(b==st)lead(m,t,d*E)});
+ nz(tt,8000,"highpass",.7,(st%2?.035:.055)*(full?1:.7),.05);
+ if(st==0||(full&&st==5))kick(t,full?.3:.2);
+ if(st==6||(full&&st==2))nz(t,1800,"bandpass",.9,full?.13:.06,.14)}
+function tick(){while(nt<ctx.currentTime+.3){sched(sp++,nt);nt+=E}$("#pg").style.width=100*(((ctx.currentTime-t0)%LOOP)/LOOP)+"%"}
+function ui(on,msg){playing=on;document.body.classList.toggle("playing",on);$("#pp").setAttribute("aria-pressed",on);$("#pp").setAttribute("aria-label",on?"Pause music":"Play music");
+ $("#pi").setAttribute("d",on?"M7 5h4v14H7zM13 5h4v14h-4z":"M8 5v14l11-7z");$("#ps").textContent=msg}
+function boot(){ctx=new AC();ctx.onstatechange=()=>{if(playing&&ctx&&ctx.state!=="running")ui(false,"Paused")};master=ctx.createGain();master.gain.value=vol;const cm=ctx.createDynamicsCompressor();bus=ctx.createGain();bus.gain.value=.9;ar=ctx.createGain();
+ const n=Math.floor(ctx.sampleRate*2.6),ir=ctx.createBuffer(2,n,ctx.sampleRate);for(let c=0;c<2;c++){const d=ir.getChannelData(c);for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/n,2.5)}
+ const cv=ctx.createConvolver(),w=ctx.createGain(),dl=ctx.createDelay(1),fb=ctx.createGain(),dw=ctx.createGain();cv.buffer=ir;w.gain.value=.4;dl.delayTime.value=E*1.5;fb.gain.value=.36;dw.gain.value=.3;
+ ar.connect(bus);ar.connect(dl);dl.connect(fb);fb.connect(dl);dl.connect(dw);dw.connect(bus);
+ bus.connect(master);bus.connect(cv);cv.connect(w);w.connect(master);master.connect(cm);cm.connect(ctx.destination);
+ noise=ctx.createBuffer(1,ctx.sampleRate*4,ctx.sampleRate);const d=noise.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
+ nt=ctx.currentTime+.15;t0=nt;sp=0;tmr=setInterval(tick,100)}
+if(!AC){$("#pp").disabled=true;$("#ps").textContent="Sound is not available in this browser"}
+$("#pp").onclick=async()=>{try{
+ if(!ctx)boot();
+ if(playing){await ctx.suspend();ui(false,"Paused")}else{await ctx.resume();if(ctx.state!=="running")throw 0;ui(true,"Playing. If you hear nothing on iPhone, check the silent switch.")}
+ }catch(e){clearInterval(tmr);try{ctx&&ctx.close()}catch(_){}ctx=null;ui(false,"Sound could not start here. Everything else still works.")}};
+$("#vol").oninput=e=>{vol=+e.target.value;if(master)master.gain.setTargetAtTime(vol,ctx.currentTime,.05)};
+</script></body></html>
